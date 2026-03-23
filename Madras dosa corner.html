@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Madras Dosa Corner – Authentic South Indian restaurant in Sonipat, Haryana. Serving crispy dosas, idli, sambar and more.">
+<title>Madras Dosa Corner | Authentic South Indian Food in Sonipat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root {
+  --orange: #FF6B1A;
+  --deep-orange: #E84A0A;
+  --yellow: #FFB800;
+  --gold: #F5A623;
+  --cream: #FFF8F0;
+  --dark: #1A0A00;
+  --brown: #5C2D0A;
+  --white: #FFFFFF;
+  --shadow: 0 20px 60px rgba(255,107,26,0.2);
+  --glow: 0 0 40px rgba(255,184,0,0.4);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 5%;
+  background: rgba(255,248,240,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,107,26,0.15);
+  transition: all 0.3s ease;
+}
+nav.scrolled {
+  padding: 12px 5%;
+  box-shadow: 0 4px 30px rgba(255,107,26,0.12);
+}
+.logo {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.6rem;
+  color: var(--orange);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.logo span { color: var(--yellow); }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--brown);
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--orange);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--orange); }
+.nav-links a:hover::after { width: 100%; }
+.nav-order-btn {
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(255,107,26,0.4);
+}
+.nav-order-btn:hover {
+  background: var(--deep-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,107,26,0.5);
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--orange);
+  transition: all 0.3s;
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 100px 5% 60px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFF0DC 50%, #FFE8C8 100%);
+}
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255,184,0,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,107,26,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-mandala {
+  position: absolute;
+  width: 600px; height: 600px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='%23FF6B1A' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%23FF6B1A' stroke-width='1.5'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='%23FF6B1A' stroke-width='1'/%3E%3C/svg%3E");
+  animation: spinSlow 60s linear infinite;
+}
+@keyframes spinSlow { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+.hero-text { z-index: 2; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,184,0,0.15);
+  border: 1px solid rgba(255,184,0,0.4);
+  color: var(--brown);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.6s ease both;
+}
+.hero-badge::before { content: '🌟'; font-size: 0.9rem; }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--dark);
+  margin-bottom: 16px;
+  animation: fadeInUp 0.7s 0.1s ease both;
+}
+.hero-title .highlight {
+  color: var(--orange);
+  display: block;
+  -webkit-text-stroke: 1px var(--deep-orange);
+}
+.hero-tagline {
+  font-size: 1.1rem;
+  color: var(--brown);
+  font-weight: 400;
+  margin-bottom: 36px;
+  line-height: 1.6;
+  animation: fadeInUp 0.7s 0.2s ease both;
+}
+.hero-tagline strong { color: var(--orange); font-weight: 600; }
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.7s 0.3s ease both;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange), var(--deep-orange));
+  color: #fff;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 30px rgba(255,107,26,0.45);
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 40px rgba(255,107,26,0.55);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--orange);
+  border: 2px solid var(--orange);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  background: var(--orange);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 48px;
+  animation: fadeInUp 0.7s 0.4s ease both;
+}
+.stat { text-align: center; }
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--orange);
+  display: block;
+}
+.stat-label { font-size: 0.78rem; color: var(--brown); font-weight: 500; }
+
+/* ── 3D CANVAS ── */
+.hero-3d {
+  position: relative;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInRight 0.8s 0.2s ease both;
+}
+#heroCanvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.floating-badge {
+  position: absolute;
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--dark);
+  animation: float 3s ease-in-out infinite;
+}
+.floating-badge.top-right { top: 60px; right: 20px; animation-delay: 0.5s; }
+.floating-badge.bottom-left { bottom: 80px; left: 10px; animation-delay: 1s; }
+.floating-badge .icon { font-size: 1.4rem; }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── SECTION SHARED ── */
+section { padding: 90px 5%; }
+.section-tag {
+  display: inline-block;
+  background: rgba(255,107,26,0.1);
+  color: var(--orange);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255,107,26,0.2);
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.section-title span { color: var(--orange); }
+.section-sub {
+  font-size: 1rem;
+  color: #7A5540;
+  max-width: 540px;
+  line-height: 1.8;
+}
+
+/* ── ABOUT ── */
+#about {
+  background: var(--white);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-image-wrap {
+  position: relative;
+}
+.about-img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.about-img-card {
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  position: relative;
+}
+.about-img-card:first-child {
+  grid-column: 1/-1;
+  aspect-ratio: 16/9;
+}
+.about-img-card .emoji-img {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(4rem, 8vw, 7rem);
+  background: linear-gradient(135deg, var(--cream), #FFE5C8);
+  border: 2px solid rgba(255,107,26,0.1);
+  transition: transform 0.4s;
+}
+.about-img-card:hover .emoji-img { transform: scale(1.05); }
+.about-badge-overlay {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+  color: #fff;
+  padding: 18px 22px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.about-badge-overlay .years {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+}
+.about-badge-overlay .yrs-label { font-size: 0.72rem; font-weight: 600; opacity: 0.9; }
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+.feat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--cream);
+  border-radius: 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--brown);
+  border: 1px solid rgba(255,107,26,0.08);
+  transition: all 0.3s;
+}
+.feat-item:hover {
+  background: rgba(255,107,26,0.06);
+  border-color: rgba(255,107,26,0.2);
+  transform: translateY(-2px);
+}
+.feat-icon { font-size: 1.2rem; }
+
+/* ── MENU ── */
+#menu {
+  background: linear-gradient(180deg, var(--cream) 0%, #FFF0DC 100%);
+  text-align: center;
+}
+.menu-header { margin-bottom: 60px; }
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 48px;
+  text-align: left;
+}
+.menu-card {
+  background: var(--white);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+  transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  position: relative;
+  cursor: pointer;
+}
+.menu-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 24px 60px rgba(255,107,26,0.18);
+}
+.menu-card-img {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.menu-card:nth-child(1) .menu-card-img { background: linear-gradient(135deg, #FFE5B4, #FFD080); }
+.menu-card:nth-child(2) .menu-card-img { background: linear-gradient(135deg, #FFDCDC, #FFA8A8); }
+.menu-card:nth-child(3) .menu-card-img { background: linear-gradient(135deg, #DCFFDC, #A8E6A8); }
+.menu-card:nth-child(4) .menu-card-img { background: linear-gradient(135deg, #DCE8FF, #A8C0FF); }
+.menu-card:nth-child(5) .menu-card-img { background: linear-gradient(135deg, #FFDCF8, #FFA8EC); }
+.menu-emoji {
+  animation: menuFloat 3s ease-in-out infinite;
+  display: inline-block;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+}
+.menu-card:nth-child(2) .menu-emoji { animation-delay: 0.4s; }
+.menu-card:nth-child(3) .menu-emoji { animation-delay: 0.8s; }
+.menu-card:nth-child(4) .menu-emoji { animation-delay: 1.2s; }
+.menu-card:nth-child(5) .menu-emoji { animation-delay: 1.6s; }
+@keyframes menuFloat {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+.best-seller-tag {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+.veg-tag {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 22px; height: 22px;
+  border: 2px solid green;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+.veg-tag::after {
+  content: '';
+  width: 8px; height: 8px;
+  background: green;
+  border-radius: 50%;
+}
+.menu-card-body { padding: 20px 22px 22px; }
+.menu-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.menu-card-desc {
+  font-size: 0.8rem;
+  color: #9A7060;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.menu-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--orange);
+}
+.menu-add-btn {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--orange), var(--deep-orange));
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(255,107,26,0.4);
+}
+.menu-add-btn:hover { transform: scale(1.2) rotate(90deg); }
+
+/* ── GALLERY ── */
+#gallery {
+  background: var(--white);
+  text-align: center;
+}
+.gallery-header { margin-bottom: 48px; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+.gallery-item {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.gallery-item:first-child { grid-column: 1/3; }
+.gallery-item:nth-child(4) { grid-column: 2/4; }
+.gallery-inner {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(3rem, 6vw, 5rem);
+  transition: transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+  position: relative;
+}
+.gallery-item:first-child .gallery-inner,
+.gallery-item:nth-child(4) .gallery-inner { height: 300px; }
+.gallery-item:nth-child(1) .gallery-inner { background: linear-gradient(135deg, #FF9A3C, #FF6B1A); }
+.gallery-item:nth-child(2) .gallery-inner { background: linear-gradient(135deg, #FFD080, #FFA800); }
+.gallery-item:nth-child(3) .gallery-inner { background: linear-gradient(135deg, #FF8FA8, #FF4D6D); }
+.gallery-item:nth-child(4) .gallery-inner { background: linear-gradient(135deg, #64C8FF, #2196F3); }
+.gallery-item:nth-child(5) .gallery-inner { background: linear-gradient(135deg, #A8E6A8, #4CAF50); }
+.gallery-item:nth-child(6) .gallery-inner { background: linear-gradient(135deg, #DCA8FF, #9C27B0); }
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,10,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.gallery-item:hover .gallery-inner { transform: scale(1.08); }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 20px;
+  transform: translateY(10px);
+  transition: transform 0.3s;
+}
+.gallery-item:hover .gallery-caption { transform: translateY(0); }
+
+/* ── 3D FOOD SCENE ── */
+#food3d {
+  background: linear-gradient(135deg, #1A0A00 0%, #3D1A00 50%, #5C2D0A 100%);
+  padding: 80px 5%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#food3d::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255,107,26,0.15) 0%, transparent 70%);
+}
+#food3d .section-title { color: var(--white); }
+#food3d .section-tag { background: rgba(255,184,0,0.2); color: var(--yellow); }
+#food3dCanvas {
+  width: 100%;
+  height: 400px;
+  margin: 40px 0;
+}
+.food3d-items {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.food3d-label {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.food3d-label .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  transition: all 0.3s;
+}
+.food3d-label:hover { color: #fff; }
+.food3d-label:hover .dot { width: 12px; height: 12px; background: var(--yellow); }
+
+/* ── LOCATION ── */
+#location {
+  background: var(--cream);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.location-info { }
+.location-details { margin-top: 32px; }
+.loc-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,107,26,0.1);
+}
+.loc-icon {
+  width: 46px; height: 46px;
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(255,107,26,0.3);
+}
+.loc-text h4 { font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.loc-text p { font-size: 0.82rem; color: #7A5540; line-height: 1.6; }
+.map-container {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  height: 420px;
+  position: relative;
+  border: 3px solid rgba(255,107,26,0.15);
+}
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── CONTACT ── */
+#contact {
+  background: linear-gradient(135deg, #FF6B1A 0%, #E84A0A 50%, #C43500 100%);
+  text-align: center;
+  padding: 90px 5%;
+  position: relative;
+  overflow: hidden;
+}
+#contact::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -20%;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+#contact::after {
+  content: '';
+  position: absolute;
+  bottom: -30%; right: -10%;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+#contact .section-title { color: #fff; }
+#contact .section-tag { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.3); }
+#contact .section-sub { color: rgba(255,255,255,0.85); margin: 0 auto 48px; }
+.contact-cta {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+  position: relative; z-index: 1;
+}
+.btn-white {
+  background: #fff;
+  color: var(--orange);
+  border: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.btn-white:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+.btn-outline-white {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.6);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.btn-outline-white:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  position: relative; z-index: 1;
+}
+.social-btn {
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 1.3rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.social-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-4px) scale(1.1);
+}
+.phone-highlight {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 24px 0;
+  position: relative; z-index: 1;
+}
+.phone-highlight a { color: #fff; text-decoration: none; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 28px 5%;
+  font-size: 0.82rem;
+}
+footer span { color: var(--orange); }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+.reveal-left.visible, .reveal-right.visible { transform: translateX(0); }
+
+/* ── MOBILE NAV ── */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--cream);
+    flex-direction: column;
+    padding: 20px 5%;
+    gap: 20px;
+    border-bottom: 2px solid rgba(255,107,26,0.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+  .nav-links.open { display: flex; }
+  .nav-order-btn { display: none; }
+
+  #hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 90px;
+  }
+  .hero-buttons { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-3d { height: 320px; order: -1; }
+  .floating-badge.top-right { top: 10px; right: 0; }
+  .floating-badge.bottom-left { bottom: 10px; left: 0; }
+
+  #about { grid-template-columns: 1fr; }
+  .about-badge-overlay { bottom: 10px; right: 10px; }
+
+  #location { grid-template-columns: 1fr; }
+  .map-container { height: 300px; }
+
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-item:first-child,
+  .gallery-item:nth-child(4) { grid-column: auto; }
+
+  .menu-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .menu-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:first-child,
+  .gallery-item:nth-child(4) { grid-column: auto; }
+  .hero-stats { gap: 20px; }
+  .about-features { grid-template-columns: 1fr; }
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 30px; right: 30px;
+  background: var(--dark);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  z-index: 9999;
+  transform: translateX(200%);
+  transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.toast.show { transform: translateX(0); }
+.toast::before { content: '✅'; font-size: 1rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="logo">Madras <span>Dosa</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-order-btn" onclick="scrollToContact()">📞 Order Now</button>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-mandala"></div>
+  <div class="hero-text">
+    <div class="hero-badge">Est. Since 2010 · Sonipat's Favourite</div>
+    <h1 class="hero-title">
+      Madras
+      <span class="highlight">Dosa Corner</span>
+    </h1>
+    <p class="hero-tagline">
+      Authentic South Indian Taste in <strong>Sonipat</strong><br>
+      Crispy, Golden & Made with Love 🤍
+    </p>
+    <div class="hero-buttons">
+      <a href="#menu" class="btn-primary">🍽️ View Menu</a>
+      <a href="#contact" class="btn-secondary">📞 Order Now</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number">10K+</span>
+        <span class="stat-label">Happy Customers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">50+</span>
+        <span class="stat-label">Menu Items</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">15+</span>
+        <span class="stat-label">Years Serving</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-3d">
+    <canvas id="heroCanvas"></canvas>
+    <div class="floating-badge top-right">
+      <span class="icon">⭐</span>
+      <div>
+        <div style="font-size:1rem;font-weight:700;color:var(--orange)">4.8</div>
+        <div style="font-size:0.7rem;color:#888">Rating</div>
+      </div>
+    </div>
+    <div class="floating-badge bottom-left">
+      <span class="icon">🚀</span>
+      <div>Fresh & Hot<br><span style="font-size:0.72rem;color:#888">Every Order</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image-wrap reveal reveal-left">
+    <div class="about-img-grid">
+      <div class="about-img-card">
+        <div class="emoji-img">🫓🥘</div>
+      </div>
+      <div class="about-img-card">
+        <div class="emoji-img">🌿</div>
+      </div>
+      <div class="about-img-card">
+        <div class="emoji-img">🔥</div>
+      </div>
+    </div>
+    <div class="about-badge-overlay">
+      <span class="years">15+</span>
+      <span class="yrs-label">Years of Trust</span>
+    </div>
+  </div>
+  <div class="reveal reveal-right">
+    <div class="section-tag">Our Story</div>
+    <h2 class="section-title">A Taste of <span>Chennai</span><br>in the Heart of Sonipat</h2>
+    <p class="section-sub">
+      Madras Dosa Corner brings the authentic flavours of South India right to Sonipat. 
+      Since 2010, we've been crafting crispy golden dosas, fluffy idlis, and aromatic sambar 
+      using traditional recipes and the finest ingredients — the way your grandma would have loved.
+    </p>
+    <div class="about-features">
+      <div class="feat-item"><span class="feat-icon">🌾</span> Fresh Ingredients Daily</div>
+      <div class="feat-item"><span class="feat-icon">🧑‍🍳</span> Expert South Indian Chefs</div>
+      <div class="feat-item"><span class="feat-icon">🌿</span> 100% Vegetarian</div>
+      <div class="feat-item"><span class="feat-icon">❤️</span> Made with Love</div>
+      <div class="feat-item"><span class="feat-icon">🕐</span> Quick Service</div>
+      <div class="feat-item"><span class="feat-icon">💰</span> Affordable Prices</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header reveal">
+    <div class="section-tag">Our Specialties</div>
+    <h2 class="section-title">Flavours That <span>Tell a Story</span></h2>
+    <p class="section-sub" style="margin:0 auto">Every dish crafted with authentic South Indian spices and fresh ingredients.</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card reveal" style="transition-delay:0.05s">
+      <div class="menu-card-img">
+        <span class="best-seller-tag">⭐ Best Seller</span>
+        <div class="veg-tag"></div>
+        <span class="menu-emoji">🫓</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Masala Dosa</div>
+        <div class="menu-card-desc">Crispy rice crepe stuffed with spiced potato masala. Served with coconut chutney & sambar.</div>
+        <div class="menu-card-footer">
+          <span class="menu-price">₹70</span>
+          <button class="menu-add-btn" onclick="addToCart('Masala Dosa')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card reveal" style="transition-delay:0.1s">
+      <div class="menu-card-img">
+        <div class="veg-tag"></div>
+        <span class="menu-emoji">🧀</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Paneer Masala Dosa</div>
+        <div class="menu-card-desc">Golden dosa filled with creamy paneer masala stuffing. A rich & indulgent delight.</div>
+        <div class="menu-card-footer">
+          <span class="menu-price">₹110</span>
+          <button class="menu-add-btn" onclick="addToCart('Paneer Masala Dosa')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card reveal" style="transition-delay:0.15s">
+      <div class="menu-card-img">
+        <span class="best-seller-tag" style="background:var(--gold)">🧈 Special</span>
+        <div class="veg-tag"></div>
+        <span class="menu-emoji">🥞</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Butter Special Dosa</div>
+        <div class="menu-card-desc">Extra crispy dosa loaded with fresh butter. Melts in your mouth every single bite.</div>
+        <div class="menu-card-footer">
+          <span class="menu-price">₹90</span>
+          <button class="menu-add-btn" onclick="addToCart('Butter Special Dosa')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card reveal" style="transition-delay:0.2s">
+      <div class="menu-card-img">
+        <div class="veg-tag"></div>
+        <span class="menu-emoji">🍲</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Sambar Idli</div>
+        <div class="menu-card-desc">Soft steamed idlis dunked in hot piping sambar. A comforting South Indian classic.</div>
+        <div class="menu-card-footer">
+          <span class="menu-price">₹50</span>
+          <button class="menu-add-btn" onclick="addToCart('Sambar Idli')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card reveal" style="transition-delay:0.25s">
+      <div class="menu-card-img">
+        <span class="best-seller-tag" style="background:#E91E8C">🔥 Trending</span>
+        <div class="veg-tag"></div>
+        <span class="menu-emoji">🍜</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Singapuri Chowmein</div>
+        <div class="menu-card-desc">Wok-tossed noodles with Singapore-style spicy sauce & fresh vegetables.</div>
+        <div class="menu-card-footer">
+          <span class="menu-price">₹85</span>
+          <button class="menu-add-btn" onclick="addToCart('Singapuri Chowmein')">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <div class="section-tag">Food Gallery</div>
+    <h2 class="section-title">A Feast for the <span>Eyes</span></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal">
+      <div class="gallery-inner">🫓✨</div>
+      <div class="gallery-overlay"><div class="gallery-caption">Signature Masala Dosa<br><small style="opacity:0.7;font-size:0.75rem">Our most loved dish</small></div></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.1s">
+      <div class="gallery-inner">☕🌟</div>
+      <div class="gallery-overlay"><div class="gallery-caption">Filter Coffee</div></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.15s">
+      <div class="gallery-inner">🍲❤️</div>
+      <div class="gallery-overlay"><div class="gallery-caption">Idli Sambar</div></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.2s">
+      <div class="gallery-inner">🏪🌺</div>
+      <div class="gallery-overlay"><div class="gallery-caption">Our Restaurant Interior<br><small style="opacity:0.7;font-size:0.75rem">Warm & welcoming</small></div></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.25s">
+      <div class="gallery-inner">🥗🌿</div>
+      <div class="gallery-overlay"><div class="gallery-caption">Fresh Chutneys</div></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:0.3s">
+      <div class="gallery-inner">🎉👨‍👩‍👧</div>
+      <div class="gallery-overlay"><div class="gallery-caption">Happy Customers</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3D FOOD SCENE -->
+<section id="food3d">
+  <div class="section-tag">3D Experience</div>
+  <h2 class="section-title">Our <span style="color:var(--yellow)">Signature Dishes</span></h2>
+  <canvas id="food3dCanvas"></canvas>
+  <div class="food3d-items">
+    <div class="food3d-label" onclick="focusDish(0)"><div class="dot"></div>Crispy Dosa</div>
+    <div class="food3d-label" onclick="focusDish(1)"><div class="dot"></div>Soft Idli</div>
+    <div class="food3d-label" onclick="focusDish(2)"><div class="dot"></div>Hot Sambar</div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="reveal reveal-left">
+    <div class="section-tag">Find Us</div>
+    <h2 class="section-title">Visit Us in <span>Sonipat</span></h2>
+    <p class="section-sub">Come visit us and experience the authentic taste of South India. We're conveniently located in the heart of Sonipat.</p>
+    <div class="location-details">
+      <div class="loc-item">
+        <div class="loc-icon">📍</div>
+        <div class="loc-text">
+          <h4>Address</h4>
+          <p>Gurudwara Rd, Opp. Batra Plaza,<br>Geeta Bhawan Chowk, Sonipat,<br>Haryana 131001</p>
+        </div>
+      </div>
+      <div class="loc-item">
+        <div class="loc-icon">🕐</div>
+        <div class="loc-text">
+          <h4>Opening Hours</h4>
+          <p>Monday – Sunday<br>8:00 AM – 10:00 PM</p>
+        </div>
+      </div>
+      <div class="loc-item">
+        <div class="loc-icon">📞</div>
+        <div class="loc-text">
+          <h4>Phone</h4>
+          <p><a href="tel:+911234567890" style="color:var(--orange);text-decoration:none;font-weight:600">+91 98765 43210</a></p>
+        </div>
+      </div>
+    </div>
+    <a href="https://maps.google.com/?q=Geeta+Bhawan+Chowk+Sonipat" target="_blank" class="btn-primary" style="display:inline-flex;margin-top:28px;text-decoration:none">
+      🗺️ Get Directions
+    </a>
+  </div>
+  <div class="map-container reveal reveal-right">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.0!2d77.0152!3d28.9960!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390da30dae8e1c05%3A0xa3b3d3f4b3b3c3d3!2sGeeta%20Bhawan%20Chowk%2C%20Sonipat%2C%20Haryana!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Madras Dosa Corner Location">
+    </iframe>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Get in Touch</div>
+  <h2 class="section-title" style="color:#fff">Hungry? Let's <span style="color:#FFE080">Connect!</span></h2>
+  <p class="section-sub">Call us, visit us, or follow us on social media for daily specials and updates.</p>
+  <div class="phone-highlight">📞 <a href="tel:+919876543210">+91 98765 43210</a></div>
+  <div class="contact-cta">
+    <a href="tel:+919876543210" class="btn-white">📞 Call to Order</a>
+    <a href="https://wa.me/919876543210" target="_blank" class="btn-outline-white">💬 WhatsApp Us</a>
+  </div>
+  <div class="social-links">
+    <a class="social-btn" href="#" title="Instagram">📸</a>
+    <a class="social-btn" href="#" title="Facebook">👍</a>
+    <a class="social-btn" href="#" title="YouTube">▶️</a>
+    <a class="social-btn" href="#" title="Google Maps">🗺️</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Madras Dosa Corner</span> · Sonipat, Haryana · Made with ❤️ & Dosas</p>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════
+//   NAV
+// ═══════════════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
+});
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+function scrollToContact() {
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════════
+//   TOAST
+// ═══════════════════════════════════════════
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function addToCart(item) {
+  showToast(item + ' added! 🛒');
+}
+
+// ═══════════════════════════════════════════
+//   SCROLL REVEAL
+// ═══════════════════════════════════════════
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+
+// ═══════════════════════════════════════════
+//   THREE.JS — HERO CANVAS (Rotating Dosa)
+// ═══════════════════════════════════════════
+(function initHeroScene() {
+  const canvas = document.getElementById('heroCanvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.shadowMap.enabled = true;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.set(0, 2, 6);
+  camera.lookAt(0, 0, 0);
+
+  // Lights
+  const ambient = new THREE.AmbientLight(0xffeedd, 0.8);
+  scene.add(ambient);
+  const dirLight = new THREE.DirectionalLight(0xFF6B1A, 1.4);
+  dirLight.position.set(5, 8, 5);
+  dirLight.castShadow = true;
+  scene.add(dirLight);
+  const fillLight = new THREE.PointLight(0xFFB800, 0.8, 15);
+  fillLight.position.set(-4, 2, 3);
+  scene.add(fillLight);
+  const rimLight = new THREE.PointLight(0xffffff, 0.5, 10);
+  rimLight.position.set(0, -3, -4);
+  scene.add(rimLight);
+
+  // ─── PLATE ───
+  const plateGeo = new THREE.CylinderGeometry(2, 1.9, 0.22, 64);
+  const plateMat = new THREE.MeshStandardMaterial({
+    color: 0xF0E8D8, roughness: 0.3, metalness: 0.15
+  });
+  const plate = new THREE.Mesh(plateGeo, plateMat);
+  plate.position.y = -0.8;
+  plate.castShadow = true;
+  plate.receiveShadow = true;
+  scene.add(plate);
+
+  // Plate rim highlight
+  const rimGeo = new THREE.TorusGeometry(2, 0.08, 16, 100);
+  const rimMat = new THREE.MeshStandardMaterial({ color: 0xD4C8B0, roughness: 0.2, metalness: 0.3 });
+  const rim = new THREE.Mesh(rimGeo, rimMat);
+  rim.rotation.x = Math.PI / 2;
+  rim.position.y = -0.68;
+  scene.add(rim);
+
+  // ─── DOSA BODY (flat curved cone) ───
+  const dosaGeo = new THREE.CylinderGeometry(1.6, 1.5, 0.08, 64);
+  const dosaMat = new THREE.MeshStandardMaterial({
+    color: 0xD4850A, roughness: 0.85, metalness: 0.02
+  });
+  const dosa = new THREE.Mesh(dosaGeo, dosaMat);
+  dosa.position.y = -0.56;
+  scene.add(dosa);
+
+  // Dosa crispy top texture dots
+  const crispyGroup = new THREE.Group();
+  for (let i = 0; i < 40; i++) {
+    const r = 0.2 + Math.random() * 1.2;
+    const angle = Math.random() * Math.PI * 2;
+    const dotGeo = new THREE.SphereGeometry(0.025 + Math.random() * 0.03, 8, 8);
+    const dotMat = new THREE.MeshStandardMaterial({ color: Math.random() > 0.5 ? 0xC06800 : 0xA05000 });
+    const dot = new THREE.Mesh(dotGeo, dotMat);
+    dot.position.set(Math.cos(angle) * r, -0.5, Math.sin(angle) * r);
+    crispyGroup.add(dot);
+  }
+  scene.add(crispyGroup);
+
+  // ─── MASALA FILLING (center) ───
+  const masalaGeo = new THREE.CylinderGeometry(0.55, 0.5, 0.18, 32);
+  const masalaMat = new THREE.MeshStandardMaterial({ color: 0xFF8C00, roughness: 0.9 });
+  const masala = new THREE.Mesh(masalaGeo, masalaMat);
+  masala.position.y = -0.42;
+  scene.add(masala);
+
+  // Masala peas decoration
+  const peaColors = [0x4CAF50, 0xF44336, 0xFFEB3B];
+  for (let i = 0; i < 6; i++) {
+    const peaGeo = new THREE.SphereGeometry(0.055, 10, 10);
+    const peaMat = new THREE.MeshStandardMaterial({ color: peaColors[i % 3] });
+    const pea = new THREE.Mesh(peaGeo, peaMat);
+    const ang = (i / 6) * Math.PI * 2;
+    pea.position.set(Math.cos(ang) * 0.3, -0.32, Math.sin(ang) * 0.3);
+    scene.add(pea);
+  }
+
+  // ─── DOSA CONE FOLD ───
+  const coneGeo = new THREE.ConeGeometry(0.5, 1.4, 32, 1, true);
+  const coneMat = new THREE.MeshStandardMaterial({
+    color: 0xC8700A, roughness: 0.8, side: THREE.DoubleSide
+  });
+  const cone = new THREE.Mesh(coneGeo, coneMat);
+  cone.position.set(0.2, 0.12, 0);
+  cone.rotation.z = -0.4;
+  scene.add(cone);
+
+  // ─── COCONUT CHUTNEY BOWL ───
+  const chutneyBowlGeo = new THREE.CylinderGeometry(0.42, 0.34, 0.3, 32);
+  const chutneyBowlMat = new THREE.MeshStandardMaterial({ color: 0xE8D8C0, roughness: 0.4 });
+  const chutneyBowl = new THREE.Mesh(chutneyBowlGeo, chutneyBowlMat);
+  chutneyBowl.position.set(-1.35, -0.55, 0.7);
+  scene.add(chutneyBowl);
+  const chutneyFillGeo = new THREE.CylinderGeometry(0.38, 0.38, 0.1, 32);
+  const chutneyFillMat = new THREE.MeshStandardMaterial({ color: 0xD4F0B0, roughness: 0.6 });
+  const chutneyFill = new THREE.Mesh(chutneyFillGeo, chutneyFillMat);
+  chutneyFill.position.set(-1.35, -0.41, 0.7);
+  scene.add(chutneyFill);
+
+  // ─── SAMBAR CUP ───
+  const sambarGeo = new THREE.CylinderGeometry(0.38, 0.3, 0.55, 32);
+  const sambarMat = new THREE.MeshStandardMaterial({ color: 0xE8D8C0, roughness: 0.3 });
+  const sambarCup = new THREE.Mesh(sambarGeo, sambarMat);
+  sambarCup.position.set(1.4, -0.5, 0.6);
+  scene.add(sambarCup);
+  const sambarFillGeo = new THREE.CylinderGeometry(0.34, 0.34, 0.1, 32);
+  const sambarFillMat = new THREE.MeshStandardMaterial({ color: 0xC84010, roughness: 0.7 });
+  const sambarFill = new THREE.Mesh(sambarFillGeo, sambarFillMat);
+  sambarFill.position.set(1.4, -0.27, 0.6);
+  scene.add(sambarFill);
+
+  // ─── STEAM particles ───
+  const steamGroup = new THREE.Group();
+  const steamMat = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.4 });
+  for (let i = 0; i < 8; i++) {
+    const sGeo = new THREE.SphereGeometry(0.04 + Math.random() * 0.04, 8, 8);
+    const s = new THREE.Mesh(sGeo, steamMat);
+    s.position.set((Math.random()-0.5)*0.5, Math.random()*1.2, (Math.random()-0.5)*0.5);
+    s.userData.speed = 0.3 + Math.random() * 0.4;
+    s.userData.startY = s.position.y;
+    steamGroup.add(s);
+  }
+  steamGroup.position.y = 0.1;
+  scene.add(steamGroup);
+
+  // Group all food elements
+  const foodGroup = new THREE.Group();
+  scene.children.forEach(c => {
+    if (c !== ambient && c !== dirLight && c !== fillLight && c !== rimLight) {
+      foodGroup.add(c);
+    }
+  });
+  // Re-add all to group properly
+  const foodScene = new THREE.Group();
+  [plate, rim, dosa, crispyGroup, masala, cone, chutneyBowl, chutneyFill,
+   sambarCup, sambarFill, steamGroup].forEach(m => foodScene.add(m));
+  // Add peas
+  scene.children.filter(c => c instanceof THREE.Mesh && c !== plate && c !== dosa && c !== masala && c !== cone && c !== rim).forEach(m => foodScene.add(m));
+  scene.add(foodScene);
+
+  // Resize
+  function resize() {
+    const w = canvas.parentElement.clientWidth;
+    const h = Math.min(w, 520);
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.012;
+    foodScene.rotation.y = t * 0.4;
+    foodScene.position.y = Math.sin(t * 0.7) * 0.12;
+    // Steam
+    steamGroup.children.forEach((s, i) => {
+      s.position.y = s.userData.startY + ((t * s.userData.speed + i * 0.5) % 1.5);
+      s.material.opacity = 0.4 * (1 - s.position.y / 1.5);
+      s.scale.setScalar(1 + s.position.y * 0.3);
+    });
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ═══════════════════════════════════════════
+//   THREE.JS — FOOD3D CANVAS (3 Dishes)
+// ═══════════════════════════════════════════
+(function initFood3dScene() {
+  const canvas = document.getElementById('food3dCanvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 16/9, 0.1, 100);
+  camera.position.set(0, 3, 10);
+  camera.lookAt(0, 0, 0);
+
+  scene.add(new THREE.AmbientLight(0xffeedd, 0.9));
+  const d = new THREE.DirectionalLight(0xFF8844, 1.2);
+  d.position.set(5, 8, 5);
+  scene.add(d);
+  scene.add(Object.assign(new THREE.PointLight(0xFFB800, 0.8, 20), { position: new THREE.Vector3(-5,3,3) }));
+
+  const dishes = [];
+
+  // ── Dish 1: Dosa ──
+  const d1 = new THREE.Group();
+  const p1 = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.4,1.3,0.15,48),
+    new THREE.MeshStandardMaterial({ color:0xEEE0CC, roughness:0.3 })
+  );
+  d1.add(p1);
+  const dos1 = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.1,1.0,0.07,48),
+    new THREE.MeshStandardMaterial({ color:0xC8780A, roughness:0.8 })
+  );
+  dos1.position.y = 0.11;
+  d1.add(dos1);
+  const roll = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.2,0.25,1.0,24),
+    new THREE.MeshStandardMaterial({ color:0xC07008, roughness:0.8 })
+  );
+  roll.rotation.z = Math.PI/2;
+  roll.position.set(0.1, 0.28, 0);
+  d1.add(roll);
+  d1.position.set(-3.5, 0, 0);
+  scene.add(d1);
+  dishes.push(d1);
+
+  // ── Dish 2: Idli ──
+  const d2 = new THREE.Group();
+  const p2 = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.4,1.3,0.15,48),
+    new THREE.MeshStandardMaterial({ color:0xEEE0CC, roughness:0.3 })
+  );
+  d2.add(p2);
+  [[-.5,0,.2],[.5,0,.2],[0,0,-.5]].forEach(([x,y,z]) => {
+    const idli = new THREE.Mesh(
+      new THREE.SphereGeometry(0.34, 24, 24),
+      new THREE.MeshStandardMaterial({ color:0xF8F0E8, roughness:0.7 })
+    );
+    idli.scale.y = 0.55;
+    idli.position.set(x, 0.2, z);
+    d2.add(idli);
+  });
+  d2.position.set(0, 0, 0);
+  scene.add(d2);
+  dishes.push(d2);
+
+  // ── Dish 3: Sambar bowl ──
+  const d3 = new THREE.Group();
+  const bowl = new THREE.Mesh(
+    new THREE.SphereGeometry(1.1, 32, 32, 0, Math.PI*2, 0, Math.PI*0.55),
+    new THREE.MeshStandardMaterial({ color:0xD4C0A8, roughness:0.3, side:THREE.DoubleSide })
+  );
+  d3.add(bowl);
+  const liquid = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.9, 0.9, 0.05, 32),
+    new THREE.MeshStandardMaterial({ color:0xC03010, roughness:0.6, transparent:true, opacity:0.9 })
+  );
+  liquid.position.y = 0.18;
+  d3.add(liquid);
+  // floating veggie bits
+  for(let i=0;i<6;i++){
+    const veg = new THREE.Mesh(
+      new THREE.SphereGeometry(0.07,8,8),
+      new THREE.MeshStandardMaterial({ color:[0xE84000,0xFF8800,0x8BC34A][i%3] })
+    );
+    const a = (i/6)*Math.PI*2;
+    veg.position.set(Math.cos(a)*0.5, 0.22, Math.sin(a)*0.5);
+    d3.add(veg);
+  }
+  d3.position.set(3.5, 0, 0);
+  scene.add(d3);
+  dishes.push(d3);
+
+  // Labels (floating text planes)
+  function resize3d() {
+    const w = canvas.parentElement.clientWidth;
+    const h = Math.min(400, w * 0.4);
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize3d();
+  window.addEventListener('resize', resize3d);
+
+  let t3 = 0;
+  let focused = -1;
+  window.focusDish = function(idx) {
+    focused = idx;
+    setTimeout(() => { focused = -1; }, 2000);
+  };
+
+  function animate3d() {
+    requestAnimationFrame(animate3d);
+    t3 += 0.015;
+    dishes.forEach((d, i) => {
+      d.rotation.y = t3 * 0.5 + i * 1.5;
+      const isFocused = focused === i;
+      const targetY = isFocused ? 0.6 : Math.sin(t3 + i * 2) * 0.2;
+      d.position.y += (targetY - d.position.y) * 0.05;
+      const targetScale = isFocused ? 1.25 : 1.0;
+      d.scale.x += (targetScale - d.scale.x) * 0.05;
+      d.scale.y = d.scale.x;
+      d.scale.z = d.scale.x;
+    });
+    renderer.render(scene, camera);
+  }
+  animate3d();
+})();
+
+// ═══════════════════════════════════════════
+//   MENU CARD — hover 3D tilt
+// ═══════════════════════════════════════════
+document.querySelectorAll('.menu-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `translateY(-12px) scale(1.02) rotateX(${-y*8}deg) rotateY(${x*8}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+</script>
+</body>
+</html>
